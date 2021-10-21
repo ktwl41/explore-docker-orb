@@ -1,17 +1,23 @@
 version: 2.1
 
+orbs:
+  docker: circleci/docker@1.7.0
+
 jobs:
-  echo:
-    docker:
-      - image: cimg/base:stable
+  check:
+    # by default, this is using the legacy circleci/python:3.6 image
+    executor: docker/docker
     steps:
       - run:
-          name: Greet
-          command: echo "I love ${COLOR} builds."
-          environment:
-            COLOR: "green"
+          name: Check Docker details
+          command: |
+            # we should already have Docker installed
+            command -v docker
+            
+            # print Docker version (both client and server)
+            docker version
 
 workflows:
   main:
     jobs:
-      - echo
+      - check
