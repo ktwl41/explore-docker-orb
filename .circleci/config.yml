@@ -16,6 +16,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Check Docker version
+          command: |
             # print Docker version (this expects our Docker server/daemon is up)
             docker version
 
