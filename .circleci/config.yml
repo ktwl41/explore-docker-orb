@@ -9,12 +9,14 @@ jobs:
     executor: docker/docker
     steps:
       - run:
-          name: Check Docker details
+          name: Confirm docker CLI is available
           command: |
             # we should already have Docker installed
             command -v docker
-            
-            # print Docker version (both client and server)
+      - setup_remote_docker
+      - run:
+          name: Check Docker version
+            # print Docker version (this expects our Docker server/daemon is up)
             docker version
 
 workflows:
